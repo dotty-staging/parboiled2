@@ -534,7 +534,7 @@ class OpTreeContext(parser: Expr[Parser])(using Quotes) {
       case Right(rule) => '{ $rule ne null }
     }
     protected def renderInner(start: Expr[Int], wrapped: Boolean): Expr[Boolean] = {
-      val Left(value) = call
+      val Left(value) = call: @unchecked
       value.render(wrapped)
     }
   }
