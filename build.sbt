@@ -26,7 +26,7 @@ val commonSettings = Seq(
     "-encoding",
     "UTF-8",
     "-feature",
-    "-language:_",
+    // "-language:_",
     "-unchecked"
     //"-Ywarn-numeric-widen",
   ),
