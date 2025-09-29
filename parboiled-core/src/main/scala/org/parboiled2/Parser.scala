@@ -97,14 +97,14 @@ abstract class Parser(initialValueStackSize: Int = 16, maxValueStackSize: Int = 
   private var _valueStack: ValueStack = _
 
   // the current ErrorAnalysisPhase or null (in the initial run)
-  private var phase: ErrorAnalysisPhase = _
+  private var phase: ErrorAnalysisPhase | Null = _
 
   def copyStateFrom(other: Parser, offset: Int): Unit = {
     _cursorChar = other._cursorChar
     _cursor = other._cursor - offset
     _valueStack = other._valueStack
     phase = other.phase
-    if (phase ne null) phase.applyOffset(offset)
+    if (phase ne null) phase.nn.applyOffset(offset)
   }
 
   /** THIS IS NOT PUBLIC API and might become hidden in future. Use only if you know what you are doing!
@@ -166,7 +166,7 @@ abstract class Parser(initialValueStackSize: Int = 16, maxValueStackSize: Int = 
         ParseError(reportedErrorPos, principalErrorPos, traces.result())
       }
       if (phase3.traceNr < errorTraceCollectionLimit) {
-        val trace: RuleTrace =
+        val trace: RuleTrace | Null =
           try {
             phase = phase3
             runRule()
@@ -239,7 +239,7 @@ abstract class Parser(initialValueStackSize: Int = 16, maxValueStackSize: Int = 
 
   /** THIS IS NOT PUBLIC API and might become hidden in future. Use only if you know what you are doing!
     */
-  def __enterNotPredicate(): AnyRef = {
+  def __enterNotPredicate(): AnyRef | Null = {
     val saved = phase
     phase = null
     saved
@@ -247,7 +247,7 @@ abstract class Parser(initialValueStackSize: Int = 16, maxValueStackSize: Int = 
 
   /** THIS IS NOT PUBLIC API and might become hidden in future. Use only if you know what you are doing!
     */
-  def __exitNotPredicate(saved: AnyRef): Unit = phase = saved.asInstanceOf[ErrorAnalysisPhase]
+  def __exitNotPredicate(saved: AnyRef | Null): Unit = phase = saved.asInstanceOf[ErrorAnalysisPhase]
 
   /** THIS IS NOT PUBLIC API and might become hidden in future. Use only if you know what you are doing!
     */

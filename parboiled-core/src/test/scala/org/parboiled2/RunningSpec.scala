@@ -22,11 +22,11 @@ import utest._
 object RunningSpec extends TestSuite {
 
   class TestParser(val input: ParserInput) extends Parser {
-    def A                 = rule('a' ~ B ~ EOI)
-    def B                 = rule(oneOrMore('b'))
-    def C(n: Int)(m: Int) = rule((n - m).times('c'))
-    def D[S <: String]    = rule('d')
-    def go(): Try[Unit]   = null
+    def A                      = rule('a' ~ B ~ EOI)
+    def B                      = rule(oneOrMore('b'))
+    def C(n: Int)(m: Int)      = rule((n - m).times('c'))
+    def D[S <: String]         = rule('d')
+    def go(): Try[Unit] | Null = null
   }
 
   val tests = Tests {

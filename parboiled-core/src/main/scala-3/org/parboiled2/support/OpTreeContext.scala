@@ -137,7 +137,7 @@ class OpTreeContext(parser: Expr[Parser])(using Quotes) {
     def withSeparator(sep: Separator): OpTree
   }
 
-  case class ZeroOrMore(op: OpTree, collector: Collector, separator: Separator = null) extends WithSeparator {
+  case class ZeroOrMore(op: OpTree, collector: Collector, separator: Separator | Null = null) extends WithSeparator {
     def withSeparator(sep: Separator) = copy(separator = sep)
     def ruleTraceNonTerminalKey       = '{ RuleTrace.ZeroOrMore }
 
@@ -166,7 +166,7 @@ class OpTreeContext(parser: Expr[Parser])(using Quotes) {
         }
       }
   }
-  case class OneOrMore(op: OpTree, collector: Collector, separator: Separator = null) extends WithSeparator {
+  case class OneOrMore(op: OpTree, collector: Collector, separator: Separator | Null = null) extends WithSeparator {
     def withSeparator(sep: Separator) = copy(separator = sep)
     def ruleTraceNonTerminalKey       = '{ RuleTrace.OneOrMore }
 
@@ -251,7 +251,7 @@ class OpTreeContext(parser: Expr[Parser])(using Quotes) {
       op: OpTree,
       withMinMax: MinMaxSupplier,
       collector: Collector,
-      separator: Separator
+      separator: Separator | Null
   ): OpTree =
     n.asTerm match {
       case Literal(IntConstant(i)) =>
@@ -267,7 +267,7 @@ class OpTreeContext(parser: Expr[Parser])(using Quotes) {
       op: OpTree,
       withMinMax: MinMaxSupplier,
       collector: Collector,
-      separator: Separator
+      separator: Separator | Null
   ): OpTree = {
     range match {
       case '{ scala.Predef.intWrapper($mn).to($mx) } =>
@@ -296,7 +296,7 @@ class OpTreeContext(parser: Expr[Parser])(using Quotes) {
       op: OpTree,
       withMinMax: MinMaxSupplier,
       collector: Collector,
-      separator: Separator
+      separator: Separator | Null
   ) extends WithSeparator {
     def withSeparator(sep: Separator) = copy(separator = sep)
     def ruleTraceNonTerminalKey       = withMinMax((min, max) => '{ org.parboiled2.RuleTrace.Times($min, $max) })

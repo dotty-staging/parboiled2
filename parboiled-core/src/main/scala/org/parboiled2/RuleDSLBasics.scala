@@ -102,7 +102,7 @@ trait RuleDSLBasics {
 
   /** A generic Rule that always fails.
     */
-  def MISMATCH[I <: HList, O <: HList]: Rule[I, O] = null
+  def MISMATCH[I <: HList, O <: HList]: Rule[I, O] = null.asInstanceOf[Rule[I, O]]
 
   /** A rule that always fails and causes the parser to immediately terminate the parsing run.
     * The resulting parse error only has a single trace with a single frame which holds the given error message.

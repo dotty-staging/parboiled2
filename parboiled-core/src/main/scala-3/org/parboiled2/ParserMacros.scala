@@ -17,6 +17,7 @@
 package org.parboiled2
 
 import org.parboiled2.support.hlist.HList
+import scala.language.unsafeNulls
 
 private[parboiled2] trait ParserMacroMethods { parser: Parser =>
 

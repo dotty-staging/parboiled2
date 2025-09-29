@@ -55,7 +55,7 @@ class Base64(alphabet: String) {
     * @return The decoded array of bytes. May be of length 0. Will be <code>null</code> if the legal characters
     *         (including '=') isn't divideable by 4.  (I.e. definitely corrupted).
     */
-  def decode(sArr: Array[Char]): Array[Byte] = {
+  def decode(sArr: Array[Char]): Array[Byte] | Null = {
     // Check special case
     val sLen =
       if (sArr != null)

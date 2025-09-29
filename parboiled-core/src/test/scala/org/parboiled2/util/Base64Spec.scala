@@ -41,7 +41,7 @@ object Base64Spec extends TestSuite {
 
         assert(
           expectedEncoded == encoded,
-          expectedDecodedBytes sameElements Base64.rfc2045().decode(encoded.toCharArray),
+          expectedDecodedBytes sameElements Base64.rfc2045().decode(encoded.toCharArray).nn,
           expectedDecodedBytes sameElements Base64.rfc2045().decodeFast(encoded.toCharArray)
         )
       }

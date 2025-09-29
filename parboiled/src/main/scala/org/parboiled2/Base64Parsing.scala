@@ -85,5 +85,5 @@ object Base64Parsing {
   val customBlockDecoder: Decoder  = decodeBlock(Base64.custom())
 
   def decodeString(codec: Base64)(chars: Array[Char]): Array[Byte] = codec.decodeFast(chars)
-  def decodeBlock(codec: Base64)(chars: Array[Char]): Array[Byte]  = codec.decode(chars)
+  def decodeBlock(codec: Base64)(chars: Array[Char]): Array[Byte]  = codec.decode(chars).nn
 }
